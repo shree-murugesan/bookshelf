@@ -32,7 +32,6 @@ class AddBook extends Component {
       .then(resp => {
         console.log(resp.items[0].volumeInfo.authors);
         results = resp.items.map((item) => {
-          // console.log(item.volumeInfo.authors);
           book = {
             image: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : '',
             id: item.id,
@@ -43,7 +42,6 @@ class AddBook extends Component {
             numPages: item.volumeInfo.pageCount
           }
           return book;
-          // results.push(book)
         });
         this.setState({search_results: results});
       })
@@ -64,7 +62,7 @@ class AddBook extends Component {
         </form>
 
         {search_results.map((book) => (
-          <SearchResultBook book={book} />
+          <SearchResultBook key={book.id} book={book} />
         ))}
 
 

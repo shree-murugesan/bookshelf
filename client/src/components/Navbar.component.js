@@ -21,7 +21,7 @@ class Navbar extends Component {
         //     </ul>
         // </div>
 
-        <AppBar position="static" color="black">
+        <AppBar position="static" color="transparent">
         <Toolbar>
             <Link to="/" className="nav-link"><Bookmarks className="nav-icon" color="primary" fontSize="large"/> BookShelf </Link>
             <Link to="/add" className="nav-link"><AddCircle className="nav-icon" color="action" />Add Book</Link>
