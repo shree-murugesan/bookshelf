@@ -1,25 +1,29 @@
 import React, { Component } from "react";
 
+import { addBook } from '../actions/books';
+
 class SearchResultBook extends Component {
 
     constructor(props) {
         super(props);
-
-        this.onClickRead = this.onClickRead.bind(this);
-        this.onClickCurrRead = this.onClickCurrRead.bind(this);
-        this.onClickToBeRead = this.onClickToBeRead.bind(this);
+        this.onClickAddBook = this.onClickAddBook.bind(this);
       }
 
-    onClickRead() {
-      console.log(`adding to read: ${this.props.book.id}`);
-    }
+    onClickAddBook(status) {
+      console.log(`adding to ${status}: ${this.props.book.id}`);
+      const {book} = this.props;
+      const newBook = {
+        volumeId: book.id,
+        title: book.title,
+        author: book.author,
+        pageCount: book.numPages,
+        coverLink: book.image,
+        genres: 'Fiction',
+        avgRating: book.avgRating,
+        status: status
+      };
 
-    onClickCurrRead() {
-      console.log(`adding to curr: ${this.props.book.id}`);
-    }
-
-    onClickToBeRead() {
-      console.log(`adding to tbr: ${this.props.book.id}`);
+      addBook(newBook);
     }
 
   render() {
@@ -32,9 +36,9 @@ class SearchResultBook extends Component {
         {book.desc} <br/>
         {book.avgRating} <br/>
         {book.numPages} <br/>
-        <button onClick={this.onClickRead} >READ</button> 
-        <button onClick={this.onClickCurrRead} >CURRENTLY READING</button> 
-        <button onClick={this.onClickToBeRead} >TO BE READ</button>
+        <button onClick={this.onClickAddBook.bind(this, 'Read')} >READ</button> 
+        <button onClick={this.onClickAddBook.bind(this, 'Currently Reading')} >CURRENTLY READING</button> 
+        <button onClick={this.onClickAddBook.bind(this, 'To Be Read')} >TO BE READ</button>
       </div>
     );
   }

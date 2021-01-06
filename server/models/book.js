@@ -16,7 +16,9 @@ const bookSchema = mongoose.Schema({
     coverLink: String,
     genres: [String],
     status: {
-        enum: [ 'Read', 'Currently Reading', 'To Be Read' ]
+        type: String,
+        enum: [ 'Read', 'Currently Reading', 'To Be Read' ],
+        default: 'To Be Read',
     },
 })
 
