@@ -43,18 +43,18 @@ class AddBook extends Component {
           }
           return book;
         });
-        this.setState({search_results: results});
+        this.setState({ search_results: results });
       })
   }
 
   onSearch(e) {
     e.preventDefault();
     console.log(`searching: ${this.state.search_text}`);
-    this.setState({search_executed: true}, this.getBook);
+    this.setState({ search_executed: true }, this.getBook);
   }
 
   render() {
-    const {search_results} = this.state;
+    const { search_results } = this.state;
     return (
       <div>
         <form autoComplete="off" onSubmit={this.onSearch}>
@@ -64,7 +64,6 @@ class AddBook extends Component {
         {search_results.map((book) => (
           <SearchResultBook key={book.id} book={book} />
         ))}
-
 
       </div>
     );

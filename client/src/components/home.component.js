@@ -13,11 +13,11 @@ class Home extends Component {
     this.getCurrentBooks = this.getCurrentBooks.bind(this);
   }
 
-  getCurrentBooks = async() => {
+  getCurrentBooks = async () => {
     const books = await getBooksCurrentlyReading();
     this.setState({ books: books });
   }
-  
+
   componentDidMount() {
     this.getCurrentBooks();
   }
@@ -28,7 +28,7 @@ class Home extends Component {
   }
 
   render() {
-    const {books} = this.state;
+    const { books } = this.state;
     if (books.length === 0) {
       return (
         <div>
@@ -39,7 +39,7 @@ class Home extends Component {
       return (
         <div>
           <h1>CURRENTLY READING THESE BOOKS</h1>
-  
+
           {books.map((book) => (
             <Book key={book.volumeId} book={book} refreshCallback={this.refreshCallback} />
           ))}

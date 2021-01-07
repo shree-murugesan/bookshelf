@@ -17,53 +17,53 @@ class ViewBooks extends Component {
     console.log(`hi ${this.state.coverView}`);
   }
 
-  getAllBooks = async() => {
+  getAllBooks = async () => {
     const booksCurrent = await getBooksCurrentlyReading();
     const booksRead = await getBooksRead();
     const booksTBR = await getBooksTBR();
 
-    this.setState({ 
+    this.setState({
       booksCurrent: booksCurrent,
       booksRead: booksRead,
       booksTBR: booksTBR
     });
   }
-  
+
   componentDidMount() {
     this.getAllBooks();
   }
 
   changeView() {
     console.log(`yo ${this.state.coverView}`);
-    this.setState({coverView: !this.state.coverView});
+    this.setState({ coverView: !this.state.coverView });
   }
 
 
   render() {
-    const {booksCurrent} = this.state;
-    const {booksRead} = this.state;
-    const {booksTBR} = this.state;
+    const { booksCurrent } = this.state;
+    const { booksRead } = this.state;
+    const { booksTBR } = this.state;
     return (
       <div>
         <button onClick={this.changeView.bind(this)}>switch view</button>
         <div className='currently-reading'>
           <h3>currently reading</h3>
           {booksCurrent.map((book) => (
-            <Book key={book.volumeId} book={book} coverView={this.state.coverView}/>
+            <Book key={book.volumeId} book={book} coverView={this.state.coverView} />
           ))}
         </div>
 
         <div className='tbr'>
           <h3>tbr</h3>
-        {booksTBR.map((book) => (
-            <Book key={book.volumeId} book={book} coverView={this.state.coverView}/>
+          {booksTBR.map((book) => (
+            <Book key={book.volumeId} book={book} coverView={this.state.coverView} />
           ))}
         </div>
 
         <div className='read'>
           <h3>read</h3>
-        {booksRead.map((book) => (
-            <Book key={book.volumeId} book={book} coverView={this.state.coverView}/>
+          {booksRead.map((book) => (
+            <Book key={book.volumeId} book={book} coverView={this.state.coverView} />
           ))}
         </div>
       </div>
