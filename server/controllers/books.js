@@ -52,4 +52,22 @@ export const getBooksCurrentlyReading = async (req, res) => {
     }
 }
 
+export const getBooksRead = async (req, res) => {
+    try {
+        const books = await Book.find( { status: 'Read' } );     
+        res.status(200).json(books);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+export const getBooksTBR = async (req, res) => {
+    try {
+        const books = await Book.find( { status: 'To Be Read' } );     
+        res.status(200).json(books);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
 export default router;

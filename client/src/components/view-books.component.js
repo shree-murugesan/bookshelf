@@ -1,10 +1,71 @@
 import React, { Component } from "react";
+import Book from './Book.component';
+import { getBooksCurrentlyReading, getBooksRead, getBooksTBR } from '../actions/books';
 
 class ViewBooks extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      booksCurrent: [],
+      booksRead: [],
+      booksTBR: [],
+      coverView: false,
+    }
+    this.getAllBooks = this.getAllBooks.bind(this);
+    this.changeView = this.changeView.bind(this);
+    console.log(`hi ${this.state.coverView}`);
+  }
+
+  getAllBooks = async() => {
+    const booksCurrent = await getBooksCurrentlyReading();
+    const booksRead = await getBooksRead();
+    const booksTBR = await getBooksTBR();
+
+    this.setState({ 
+      booksCurrent: booksCurrent,
+      booksRead: booksRead,
+      booksTBR: booksTBR
+    });
+  }
+  
+  componentDidMount() {
+    this.getAllBooks();
+  }
+
+  changeView() {
+    console.log(`yo ${this.state.coverView}`);
+    this.setState({coverView: !this.state.coverView});
+  }
+
+
   render() {
+    const {booksCurrent} = this.state;
+    const {booksRead} = this.state;
+    const {booksTBR} = this.state;
     return (
       <div>
-        <p>React ViewBooks Component!</p>
+        <button onClick={this.changeView.bind(this)}>switch view</button>
+        <div className='currently-reading'>
+          <h3>currently reading</h3>
+          {booksCurrent.map((book) => (
+            <Book key={book.volumeId} book={book} coverView={this.state.coverView}/>
+          ))}
+        </div>
+
+        <div className='tbr'>
+          <h3>tbr</h3>
+        {booksTBR.map((book) => (
+            <Book key={book.volumeId} book={book} coverView={this.state.coverView}/>
+          ))}
+        </div>
+
+        <div className='read'>
+          <h3>read</h3>
+        {booksRead.map((book) => (
+            <Book key={book.volumeId} book={book} coverView={this.state.coverView}/>
+          ))}
+        </div>
       </div>
     );
   }

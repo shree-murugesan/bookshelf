@@ -19,17 +19,27 @@ class Book extends Component {
 
     render() {
       const {book} = this.props;
-    return (
-      <div>
-        <img alt='' src={book.coverLink} /> <br />
-        {book.title} <br/>
-        {book.author} <br/>
-        {book.avgRating} <br/>
-        {book.numPages} <br/>
-        <button onClick={this.onUpdateStatus.bind(this, 'Read')}>FINISHED</button>
-        <button onClick={this.onUpdateStatus.bind(this, 'To Be Read')}>STOPPED</button>
-      </div>
-    );
+      if (this.props.coverView) {
+        return (
+          <div>
+            <img alt='' src={book.coverLink} /> <br />
+            {book.title} <br/>
+            {book.author} 
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            <img alt='' src={book.coverLink} /> <br />
+            {book.title} <br/>
+            {book.author} <br/>
+            {book.avgRating} <br/>
+            {book.numPages} <br/>
+            <button onClick={this.onUpdateStatus.bind(this, 'Read')}>FINISHED</button>
+            <button onClick={this.onUpdateStatus.bind(this, 'To Be Read')}>STOPPED</button>
+          </div>
+        );
+      }
   }
 }
 

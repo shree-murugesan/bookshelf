@@ -21,6 +21,28 @@ export const getBooksCurrentlyReading = async () => {
   }
 }
 
+export const getBooksRead = async () => {
+  try {
+
+    const {data} = await axios.get(`${url}/read`);
+    return data;
+
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+export const getBooksTBR = async () => {
+  try {
+
+    const {data} = await axios.get(`${url}/tbr`);
+    return data;
+
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 export const addBook = (newBook) => {
   try {
     axios.post(`${url}/add`, newBook).then(res => console.log(res.data));
