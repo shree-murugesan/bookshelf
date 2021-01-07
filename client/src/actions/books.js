@@ -8,12 +8,32 @@ export const getBooks = () => {
     } catch (error) {
       console.log(error.message);
     }
-  };
+};
 
-export const addBook = (newBook) => {
+export const getBooksCurrentlyReading = async () => {
   try {
-    axios.post(url + '/add', newBook).then(res => console.log(res.data));
+
+    const {data} = await axios.get(`${url}/current`);
+    return data;
+
   } catch (error) {
     console.log(error.message);
   }
-};
+}
+
+export const addBook = (newBook) => {
+  try {
+    axios.post(`${url}/add`, newBook).then(res => console.log(res.data));
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+export async function updateBook(id, updatedBook) {
+  try {
+    const {data} = await axios.patch(`${url}/${id}/update`, updatedBook);
+    console.log(data);
+  } catch (error) {
+    console.log(error.message);
+  }
+}

@@ -21,10 +21,31 @@ export const addBook = async (req, res) => {
     }
 }
 
+export const updateBook = async (req, res) => {
+    const { id } = req.params;
+    const { volumeId, title, author, pageCount, avgRating, userRating, coverLink, genres, status } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No book with id: ${id}`);
+
+    const updatedBook = {volumeId, title, author, pageCount, avgRating, userRating, coverLink, genres, status, _id: id};
+
+    await Book.findByIdAndUpdate(id, updatedBook, { new: true });
+
+    res.json(updatedBook);
+}
+
 export const getBooks = async (req, res) => {
     try {
-        const books = await Book.find();
-                
+        const books = await Book.find(); 
+        res.status(200).json(books);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+export const getBooksCurrentlyReading = async (req, res) => {
+    try {
+        const books = await Book.find( { status: 'Currently Reading' } );     
         res.status(200).json(books);
     } catch (error) {
         res.status(404).json({ message: error.message });
