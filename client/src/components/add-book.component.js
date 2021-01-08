@@ -30,7 +30,6 @@ class AddBook extends Component {
     fetch(searchBooksUrl + '/"' + this.state.search_text + '/"')
       .then(resp => resp.json())
       .then(resp => {
-        console.log(resp.items[0].volumeInfo.authors);
         results = resp.items.map((item) => {
           book = {
             image: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : '',

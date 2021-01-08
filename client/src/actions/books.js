@@ -55,3 +55,12 @@ export async function updateBook(id, updatedBook) {
     console.log(error.message);
   }
 }
+
+export async function getRandomBook(genre) {
+  try {
+    const { data } = await axios.get(`${url}/random/${genre}`);
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
+}

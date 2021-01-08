@@ -14,7 +14,6 @@ class ViewBooks extends Component {
     }
     this.getAllBooks = this.getAllBooks.bind(this);
     this.changeView = this.changeView.bind(this);
-    console.log(`hi ${this.state.coverView}`);
   }
 
   getAllBooks = async () => {
@@ -34,7 +33,6 @@ class ViewBooks extends Component {
   }
 
   changeView() {
-    console.log(`yo ${this.state.coverView}`);
     this.setState({ coverView: !this.state.coverView });
   }
 
