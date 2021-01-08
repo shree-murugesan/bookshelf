@@ -35,10 +35,10 @@ class AddBook extends Component {
             image: item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks.thumbnail : '',
             id: item.id,
             title: item.volumeInfo.title,
-            author: item.volumeInfo.authors[0],
+            author: item.volumeInfo.authors ? item.volumeInfo.authors[0] : 'Unknown Author',
             desc: item.volumeInfo.description,
             avgRating: item.volumeInfo.averageRating,
-            numPages: item.volumeInfo.pageCount
+            pageCount: item.volumeInfo.pageCount
           }
           return book;
         });

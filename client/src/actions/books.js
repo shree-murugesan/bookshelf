@@ -39,9 +39,9 @@ export const getBooksTBR = async () => {
   }
 }
 
-export const addBook = (newBook) => {
+export async function addBook(newBook) {
   try {
-    axios.post(`${url}/add`, newBook).then(res => console.log(res.data));
+    const { data } = await axios.post(`${url}/add`, newBook);
   } catch (error) {
     console.log(error.message);
   }

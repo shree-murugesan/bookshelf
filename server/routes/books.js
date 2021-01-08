@@ -5,8 +5,8 @@ const router = express.Router();
 
 router.get('/', getBooks);
 router.get('/current', getBooksCurrentlyReading);
-router.get('/tbr', getBooksRead);
-router.get('/read', getBooksTBR);
+router.get('/tbr', getBooksTBR);
+router.get('/read', getBooksRead);
 router.post('/add', addBook);
 router.patch('/:id/update', updateBook);
 router.get('/random/:genre', getRandomBook);

@@ -33,7 +33,7 @@ class PickNextBook extends Component {
     const { genre } = this.state;
 
     let book;
-    if (random_book.length == 0) {
+    if (random_book.length === 0) {
       book = '';
     } else {
       book = <Book book={random_book[0]}/>;
@@ -50,6 +50,7 @@ class PickNextBook extends Component {
             <option value={'SciFi'}>Sci-Fi</option>
           </NativeSelect>
         <Button variant="contained" onClick={this.onSelect} color="primary">PICK</Button>
+        <br/>
         {book}
       </div>
     );

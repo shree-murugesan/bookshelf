@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import { TBR, READ, CURRENTLY_READING } from '../constants.js';
 
 import Book from '../models/book.js';
 
@@ -12,7 +13,14 @@ export const addBook = async (req, res) => {
         volumeId, title, author, pageCount, avgRating, userRating, coverLink, genres, status
     })
 
+
     try {
+        // if (Book.find({ 'volumeId': newBook.volumeId }, function (err, docs) {
+        //     if (docs.length !== 0) {
+        //         throw(new Error("Book already exists!"));
+        //     }
+        // }))
+        newBook.validate();
         await newBook.save();
 
         res.status(201).json(newBook);
@@ -45,7 +53,7 @@ export const getBooks = async (req, res) => {
 
 export const getBooksCurrentlyReading = async (req, res) => {
     try {
-        const books = await Book.find({ status: 'Currently Reading' });
+        const books = await Book.find({ status: CURRENTLY_READING });
         res.status(200).json(books);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -54,7 +62,7 @@ export const getBooksCurrentlyReading = async (req, res) => {
 
 export const getBooksRead = async (req, res) => {
     try {
-        const books = await Book.find({ status: 'Read' });
+        const books = await Book.find({ status: READ });
         res.status(200).json(books);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -63,7 +71,7 @@ export const getBooksRead = async (req, res) => {
 
 export const getBooksTBR = async (req, res) => {
     try {
-        const books = await Book.find({ status: 'To Be Read' });
+        const books = await Book.find({ status: TBR });
         res.status(200).json(books);
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -76,12 +84,12 @@ export const getRandomBook = async (req, res) => {
         let book;
         if (genre == 'Any') {
             book = await Book.aggregate([
-                { $match: { status: 'To Be Read' } },
+                { $match: { status: TBR } },
                 { $sample: { size: 1 } },
             ]);
         } else {
             book = await Book.aggregate([
-                { $match: { status: 'To Be Read', genre: genre } },
+                { $match: { status: TBR, genre: genre } },
                 { $sample: { size: 1 } }
             ]);
         }

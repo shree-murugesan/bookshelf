@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import Book from './Book.component';
 import { getBooksCurrentlyReading, getBooksRead, getBooksTBR } from '../actions/books';
 
+const style = {
+  paddingLeft: '15px',
+};
+
 class ViewBooks extends Component {
 
   constructor(props) {
@@ -10,8 +14,9 @@ class ViewBooks extends Component {
       booksCurrent: [],
       booksRead: [],
       booksTBR: [],
-      coverView: false,
+      galleryView: false,
     }
+    this.refreshCallback = this.refreshCallback.bind(this);
     this.getAllBooks = this.getAllBooks.bind(this);
     this.changeView = this.changeView.bind(this);
   }
@@ -33,7 +38,12 @@ class ViewBooks extends Component {
   }
 
   changeView() {
-    this.setState({ coverView: !this.state.coverView });
+    this.setState({ galleryView: !this.state.galleryView });
+  }
+
+  refreshCallback() {
+    console.log('refreshing');
+    this.getAllBooks();
   }
 
 
@@ -41,27 +51,32 @@ class ViewBooks extends Component {
     const { booksCurrent } = this.state;
     const { booksRead } = this.state;
     const { booksTBR } = this.state;
+    const { galleryView } = this.state;
+
     return (
-      <div>
+      <div style={style}>
         <button onClick={this.changeView.bind(this)}>switch view</button>
         <div className='currently-reading'>
           <h3>currently reading</h3>
           {booksCurrent.map((book) => (
-            <Book key={book.volumeId} book={book} coverView={this.state.coverView} />
+            <Book key={book.volumeId} book={book}
+              galleryView={galleryView} refreshCallback={this.refreshCallback} />
           ))}
         </div>
 
         <div className='tbr'>
           <h3>tbr</h3>
           {booksTBR.map((book) => (
-            <Book key={book.volumeId} book={book} coverView={this.state.coverView} />
+            <Book key={book.volumeId} book={book}
+              galleryView={galleryView} refreshCallback={this.refreshCallback} />
           ))}
         </div>
 
         <div className='read'>
           <h3>read</h3>
           {booksRead.map((book) => (
-            <Book key={book.volumeId} book={book} coverView={this.state.coverView} />
+            <Book key={book.volumeId} book={book}
+              galleryView={galleryView} refreshCallback={this.refreshCallback} />
           ))}
         </div>
       </div>
