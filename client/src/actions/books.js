@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:4000/books';
+const url = 'https://book-shelf-26419.herokuapp.com/books';
 
 export const getBooks = () => {
   try {
