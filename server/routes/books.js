@@ -11,4 +11,8 @@ router.post('/add', addBook);
 router.patch('/:id/update', updateBook);
 router.get('/random/:genre', getRandomBook);
 
+// router.use(function(req, res) {
+// 	res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
+
 export default router;

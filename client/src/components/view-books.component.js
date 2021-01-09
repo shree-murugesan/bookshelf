@@ -28,9 +28,9 @@ class ViewBooks extends Component {
     const booksTBR = await getBooksTBR();
 
     this.setState({
-      booksCurrent: booksCurrent,
-      booksRead: booksRead,
-      booksTBR: booksTBR
+      booksCurrent: booksCurrent ? booksCurrent : [],
+      booksRead: booksRead ? booksRead : [],
+      booksTBR: booksTBR ? booksTBR : [],
     });
   }
 

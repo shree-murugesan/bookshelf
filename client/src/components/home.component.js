@@ -15,7 +15,7 @@ class Home extends Component {
 
   getCurrentBooks = async () => {
     const books = await getBooksCurrentlyReading();
-    this.setState({ books: books });
+    this.setState({ books: books ? books : [] });
   }
 
   componentDidMount() {

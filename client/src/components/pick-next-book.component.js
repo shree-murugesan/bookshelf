@@ -31,7 +31,7 @@ class PickNextBook extends Component {
   onSelect = async () => {
     console.log(`picking book in ${this.state.genre} genre`);
     const book = await getRandomBook(this.state.genre);
-    this.setState({ random_book: book });
+    this.setState({ random_book: book ? book : [] });
   }
 
   onChangeGenre(e) {
