@@ -15,6 +15,7 @@ This was built with the MERN stack: MongoDB, Express, React (bootstrapped with [
 - [x] Display toasts when book has been successfully added / there is an error adding the book
 - [ ] Improve alignment of books on View Books page 
 - [ ] Option to edit book's rating
+- [ ] Organize file structure and improve code quality (remove repeated code, unecessary console.log(), etc.) (*in progress*)
 
 # Bugs
 - [ ] When you click 'Stop Reading' on a book, it gets sent to TBR even if the book had already been read -> need to save previous status
