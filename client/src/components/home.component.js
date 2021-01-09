@@ -32,13 +32,13 @@ class Home extends Component {
     if (books.length === 0) {
       return (
         <div>
-          <h1>READ SOMETHING</h1>
+          <h2>Currently Not Reading Anything</h2>
         </div>
       );
     } else {
       return (
         <div>
-          <h1>CURRENTLY READING THESE BOOKS</h1>
+          <h2>Currently Reading These Books</h2>
 
           {books.map((book) => (
             <Book key={book.volumeId} book={book} refreshCallback={this.refreshCallback} />

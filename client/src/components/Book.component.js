@@ -9,6 +9,7 @@ import BookButtons from './BookButtons';
 const style = {
   paddingLeft: '10px',
   display: 'inline-block',
+  width: '200px',
 };
 
 class Book extends Component {
@@ -68,7 +69,7 @@ class Book extends Component {
       return (
         <div style={style}>
           <img alt='' src={book.coverLink} /> <br />
-          {book.title} <br />
+          <b>{book.title}</b> <br />
           {book.author}
         </div>
       );
@@ -76,7 +77,7 @@ class Book extends Component {
       return (
         <div style={style}>
           <img alt='' src={book.coverLink} /> <br />
-          {book.title} <br />
+          <b>{book.title}</b> <br />
           {book.author} <br />
           {ratingTitle}: <RatingView rating={rating}/> <br />
           <BookButtons status={book.status} onRead={this.openRatingDialog} onUpdateStatus={this.onUpdateStatus.bind(this)} />

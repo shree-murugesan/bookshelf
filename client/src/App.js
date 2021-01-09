@@ -16,9 +16,6 @@ function App() {
         <Route path="/add" exact component={AddBook} />
         <Route path="/view" exact component={ViewBooks} />
         <Route path="/next" exact component={PickNextBook} />
-        {/* <Route path="/edit/:id" component={EditExercise} />
-      <Route path="/create" component={CreateExercise} />
-      <Route path="/user" component={CreateUser} /> */}
       </div>
     </Router>
   );

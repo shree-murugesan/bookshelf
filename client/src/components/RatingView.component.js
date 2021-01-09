@@ -14,14 +14,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function BookButtons(props) {
+export default function RatingView(props) {
   const classes = useStyles();
-  const {rating} = props;
+  const { rating } = props;
+  if (rating) {
+    return (
+      <div className={classes.inlineDiv}>
+        {Array.from(Array(rating - (rating % 1)), (_, i) => <Star key={i} className={classes.star} />)}
+        {(rating % 1 !== 0) ? <StarHalf className={classes.star} /> : ''}
+      </div>
+    );
 
-  return (
-    <div className={classes.inlineDiv}>
-        {Array(rating - (rating % 1)).fill(<Star className={classes.star} />)}
-        {(rating % 1 !== 0) ? <StarHalf className={classes.star}/> : ''}
-    </div>
-  );
+  } else {
+    return (
+      <div className={classes.inlineDiv}>N/A</div>
+    )
+  }
 }

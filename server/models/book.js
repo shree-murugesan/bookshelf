@@ -3,18 +3,7 @@ import mongoose from 'mongoose';
 const bookSchema = mongoose.Schema({
     volumeId: {
         type: String,
-        validate: {
-            validator: function(v) {
-              Book.find({volumeId: v}, function(err,docs) {
-                 if (docs.length >= 1) {
-                    return false;
-                 } else {
-                     return true;
-                 }
-              } );
-            },
-            message: 'Book already exists!'
-          }
+        unique: true,
     },
     title: String,
     author: String,

@@ -25,7 +25,7 @@ class PickNextBook extends Component {
   }
 
   onChangeGenre(e) {
-    this.setState({genre: e.target.value});
+    this.setState({ genre: e.target.value });
   }
 
   render() {
@@ -36,21 +36,21 @@ class PickNextBook extends Component {
     if (random_book.length === 0) {
       book = '';
     } else {
-      book = <Book book={random_book[0]}/>;
+      book = <Book book={random_book[0]} />;
     }
 
     return (
       <div>
-          <InputLabel>Genre</InputLabel>
-          <NativeSelect value={genre} onChange={this.onChangeGenre}>
-            <option aria-label="None" value="Any" />
-            <option value={'Mystery'}>Mystery</option>
-            <option value={'Fantasy'}>Fantasy</option>
-            <option value={'Romance'}>Romance</option>
-            <option value={'SciFi'}>Sci-Fi</option>
-          </NativeSelect>
+        <InputLabel>Genre</InputLabel>
+        <NativeSelect value={genre} onChange={this.onChangeGenre}>
+          <option aria-label="None" value="Any" />
+          <option value={'Mystery'}>Mystery</option>
+          <option value={'Fantasy'}>Fantasy</option>
+          <option value={'Romance'}>Romance</option>
+          <option value={'SciFi'}>Sci-Fi</option>
+        </NativeSelect> <p></p>
         <Button variant="contained" onClick={this.onSelect} color="primary">PICK</Button>
-        <br/>
+        <br />
         {book}
       </div>
     );

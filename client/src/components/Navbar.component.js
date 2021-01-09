@@ -1,32 +1,25 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { Bookmarks, AddCircle, ViewModule, NavigateNext } from '@material-ui/icons';
-import { Toolbar, AppBar } from '@material-ui/core';
+import { Toolbar, AppBar, IconButton } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 import './Navbar.css';
+
+const style = {
+  marginLeft: 'auto',
+};
 
 class Navbar extends Component {
   render() {
     return (
-      //     <nav className="navbar">
-      //     <Link to="/" className="nav-link"><Bookmarks className="nav-icon" color="primary" fontSize="large"/> BookShelf </Link>
-      //     <Link to="/add" className="nav-link"><AddCircle className="nav-icon" color="action" />Add Book</Link>
-
-
-      //   </nav>
-
-      // <div className="nav-wrapper">
-      //     <Link to="/" className="nav-link"><Bookmarks className="nav-icon" color="primary" fontSize="large"/> BookShelf </Link>
-      //     <ul className="right hide-on-med-and-down">
-      //         <li><Link to="/add" className="nav-link"><AddCircle className="nav-icon" color="action" />Add Book</Link></li>
-      //     </ul>
-      // </div>
-
-      <AppBar position="static" color="transparent">
+      <AppBar position="sticky" color="white" className="app-bar" style={style}>
         <Toolbar>
-          <Link to="/" className="nav-link"><Bookmarks className="nav-icon" color="primary" fontSize="large" /> BookShelf </Link>
-          <Link to="/add" className="nav-link"><AddCircle className="nav-icon" color="action" />Add Book</Link>
-          <Link to="/view" className="nav-link"><ViewModule className="nav-icon" color="action" />View Books</Link>
-          <Link to="/next" className="nav-link"><NavigateNext className="nav-icon" color="action" />Pick Next Book</Link>
+          <IconButton edge="start" component={Link} to="/" size="large">
+            <Bookmarks color="primary" fontSize="large" />
+          </IconButton>
+          <Button className="button" style={style} startIcon={<AddCircle color="action" />} component={Link} to="/add" size="large" >Add Book</Button>
+          <Button className="button" startIcon={<ViewModule color="action" />} component={Link} to="/view" size="large" >View Books</Button>
+          <Button className="button" startIcon={<NavigateNext color="action" />} component={Link} to="/next" size="large" >Pick Next Book</Button>
         </Toolbar>
       </AppBar>
     );

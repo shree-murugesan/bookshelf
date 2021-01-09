@@ -1,8 +1,24 @@
 .nav-link {
     text-decoration: none;
     padding-left: 10px;
+    display: inline;
+    padding-bottom: 12px;
+    color: black;
 }
 
 .nav-icon {
     padding-top: 10px;
+    position: 'relative';
+    vertical-align: 'middle';
+    display: 'inline-flex';
+}
+
+.app-bar {
+    margin: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+} 
+
+.button {
+    padding-right: 5px !important;
 }

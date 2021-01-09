@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import Input from '@material-ui/core/Input';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
+import Snackbar from '@material-ui/core/Snackbar';
 import SearchResultBook from './SearchResultBook.component';
+import Alert from '@material-ui/lab/Alert';
+
+const EMPTY_SEARCH_QUERY = 'Please enter a search query';
+const BOOK_EXISTS = 'Book already exists in collection';
+const BOOK_ADDED = 'Book added to collection';
 
 class AddBook extends Component {
 
@@ -9,11 +17,14 @@ class AddBook extends Component {
 
     this.onChangeSearchText = this.onChangeSearchText.bind(this);
     this.onSearch = this.onSearch.bind(this);
+    this.handleCloseAlert = this.handleCloseAlert.bind(this);
+    this.setAlert = this.setAlert.bind(this);
 
     this.state = {
       search_text: '',
-      search_executed: false,
-      search_results: []
+      search_results: [],
+      alertOpen: false,
+      alertMessage: '',
     }
   }
 
@@ -49,20 +60,65 @@ class AddBook extends Component {
   onSearch(e) {
     e.preventDefault();
     console.log(`searching: ${this.state.search_text}`);
-    this.setState({ search_executed: true }, this.getBook);
+    if (this.state.search_text !== '') {
+      this.getBook();
+    } else {
+      this.setState({
+        alertOpen: true,
+        alertMessage: EMPTY_SEARCH_QUERY,
+      });
+    }
+  }
+
+  setAlert(alertMessage) {
+    this.setState({
+      alertOpen: true,
+      alertMessage: alertMessage,
+    });
+  }
+
+  handleCloseAlert() {
+    this.setState({ alertOpen: false, alertMessage: '' });
   }
 
   render() {
-    const { search_results } = this.state;
+    const { search_results, alertOpen, alertMessage } = this.state;
+
+    let alert;
+    if (alertMessage === EMPTY_SEARCH_QUERY) {
+      alert =
+        <Alert icon={<SearchIcon fontSize="inherit" />} onClose={this.handleCloseAlert} severity="info">
+          {alertMessage}
+        </Alert>
+    } else if (alertMessage === BOOK_EXISTS) {
+      alert =
+        <Alert onClose={this.handleCloseAlert} severity="error">
+          {alertMessage}
+        </Alert>
+    } else if (alertMessage === BOOK_ADDED) {
+      alert =
+        <Alert onClose={this.handleCloseAlert} severity="success">
+          {alertMessage}
+        </Alert>
+    }
+
     return (
       <div>
         <form autoComplete="off" onSubmit={this.onSearch}>
           <Input placeholder="Search" value={this.state.search_text} onChange={this.onChangeSearchText} />
+          <IconButton color="primary" onClick={this.onSearch}>
+            <SearchIcon />
+          </IconButton>
         </form>
 
         {search_results.map((book) => (
-          <SearchResultBook key={book.id} book={book} />
+          <SearchResultBook key={book.id} book={book} setAlert={this.setAlert.bind(this)} />
         ))}
+
+        <Snackbar open={alertOpen}
+          anchorOrigin={{ vertical: 'top', horizontal: 'right' }} autoHideDuration={5000} onClose={this.handleCloseAlert}>
+          {alert}
+        </Snackbar>
 
       </div>
     );

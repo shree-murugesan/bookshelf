@@ -30,18 +30,24 @@ export const getBooksRead = async () => {
 
 export const getBooksTBR = async () => {
   try {
-
     const { data } = await axios.get(`${url}/tbr`);
     return data;
-
   } catch (error) {
     console.log(error.message);
   }
 }
-
-export async function addBook(newBook) {
+export const addBook = async (newBook) => {
   try {
-    const { data } = await axios.post(`${url}/add`, newBook);
+    return axios.post(`${url}/add`, newBook)
+      .then(response => {
+        console.log(`added ${newBook.title}`);
+        return '201';
+      })
+      .catch(error => {
+        console.log(error.message);
+        return error.message.slice(-3);
+      });
+
   } catch (error) {
     console.log(error.message);
   }

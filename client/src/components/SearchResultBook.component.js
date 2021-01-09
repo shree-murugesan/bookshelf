@@ -1,8 +1,18 @@
 import React, { Component } from "react";
-import { TBR, READ, CURRENTLY_READING } from '../constants.js';
+import { READ } from '../constants.js';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from '@material-ui/core';
 import { Rating } from '@material-ui/lab';
 import { addBook } from '../actions/books';
+import RatingView from './RatingView.component';
+import BookButtons from './BookButtons';
+
+const style = {
+  paddingLeft: '10px',
+  display: 'inline-block',
+};
+
+const BOOK_EXISTS = 'Book already exists in collection';
+const BOOK_ADDED = 'Book added to collection';
 
 class SearchResultBook extends Component {
 
@@ -18,10 +28,9 @@ class SearchResultBook extends Component {
     this.onClickAddBook = this.onClickAddBook.bind(this);
   }
 
-  onClickAddBook = async(status) => {
+  onClickAddBook = async (status) => {
     const { book } = this.props;
     const { userRating } = this.state;
-    console.log(`adding to ${status}: ${book.id}`);
     const newBook = {
       volumeId: book.id,
       title: book.title,
@@ -34,20 +43,25 @@ class SearchResultBook extends Component {
       status: status
     };
 
-    await addBook(newBook);
+    const respCode = await addBook(newBook);
+    if (respCode === '400') {
+      this.props.setAlert(BOOK_EXISTS);
+    } else if (respCode === '201') {
+      this.props.setAlert(BOOK_ADDED);
+    }
   }
 
   openRatingDialog() {
-    this.setState({ratingDialogOpen: true});
+    this.setState({ ratingDialogOpen: true });
   }
 
   handleClose() {
-    this.setState({ratingDialogOpen: false});
+    this.setState({ ratingDialogOpen: false });
   }
 
   handleRatingChange(e) {
     this.setState({
-      ratingDialogOpen: false, 
+      ratingDialogOpen: false,
       userRating: e.target.value,
     });
     this.onClickAddBook(READ);
@@ -57,28 +71,27 @@ class SearchResultBook extends Component {
     const { book } = this.props;
     const { ratingDialogOpen } = this.state;
     return (
-      <div>
+      <div style={style}>
         <img alt='' src={book.image} /> <br />
         {book.title} <br />
         {book.author} <br />
-        {book.desc} <br />
-        {book.avgRating} <br />
-        {book.pageCount} <br />
-        <button onClick={this.openRatingDialog}>READ</button>
-        <button onClick={this.onClickAddBook.bind(this, CURRENTLY_READING)} >CURRENTLY READING</button>
-        <button onClick={this.onClickAddBook.bind(this, TBR)} >TO BE READ</button>
+        {book.desc} {book.desc ? <br /> : ''}
+        Average Rating: <RatingView rating={book.avgRating} /> <br />
+        Page Count: {book.pageCount} <br />
+
+        <BookButtons status='SearchResults' onRead={this.openRatingDialog} onUpdateStatus={this.onClickAddBook.bind(this)} />
 
         <Dialog open={ratingDialogOpen} onClose={this.handleClose} >
-            <DialogTitle>Rate the Book</DialogTitle>
-            <DialogContent>
-              <Rating name="half-rating" defaultValue={2.5} precision={0.5} onChange={this.handleRatingChange} />
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={this.handleClose} color="primary">
-                Cancel
+          <DialogTitle>Rate the Book</DialogTitle>
+          <DialogContent>
+            <Rating name="half-rating" defaultValue={2.5} precision={0.5} onChange={this.handleRatingChange} />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Cancel
               </Button>
-            </DialogActions>
-          </Dialog>
+          </DialogActions>
+        </Dialog>
 
       </div>
     );

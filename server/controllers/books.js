@@ -9,22 +9,23 @@ const router = express.Router();
 export const addBook = async (req, res) => {
     const { volumeId, title, author, pageCount, avgRating, userRating, coverLink, genres, status } = req.body;
 
-    const newBook = new Book({
-        volumeId, title, author, pageCount, avgRating, userRating, coverLink, genres, status
-    })
-
-
     try {
-        // if (Book.find({ 'volumeId': newBook.volumeId }, function (err, docs) {
-        //     if (docs.length !== 0) {
-        //         throw(new Error("Book already exists!"));
-        //     }
-        // }))
-        newBook.validate();
-        await newBook.save();
+        const newBook = new Book({
+            volumeId, title, author, pageCount, avgRating, userRating, coverLink, genres, status
+        });
 
-        res.status(201).json(newBook);
+        let saveBook = await newBook.save().then(newBook => {
+            res.status(201).json(newBook);
+        }).catch(err => {
+            console.log(err.message);
+            if (err.code === 11000) {
+                res.status(400).json({ message: 'Book already exists in collection' });
+            } else {
+                res.status(409).json({ message: err.message });
+            }
+        });
     } catch (error) {
+        console.log(error.message);
         res.status(409).json({ message: error.message });
     }
 }

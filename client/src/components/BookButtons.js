@@ -16,52 +16,82 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function BookButtons(props) {
-    const classes = useStyles();
-    const {status} = props;
+  const classes = useStyles();
+  const { status } = props;
 
-    if (status === TBR) {
-      return (
+  if (status === 'SearchResults') {
+    return (
+      <div>
         <Button
           size="small"
           variant="contained"
           color="secondary"
           className={classes.button}
-          onClick={() => { props.onUpdateStatus(CURRENTLY_READING) }}>
-          Start Reading
-        </Button>
-      );
-    } else if (status === READ) {
-      return (
-        <Button
-          size="small"
-          variant="contained"
-          color="secondary"
-          className={classes.button}
-          onClick={() => { props.onUpdateStatus(CURRENTLY_READING) }}>
-          Read Again
-        </Button>
-      );
-    } else {
-      return (
-        <div>
-          <Button
-            size="small"
-            variant="contained"
-            color="secondary"
-            className={classes.button}
-            onClick={() => { props.onRead() }}>
-            Finish Reading
-          </Button> <br/>
-          <Button
-            size="small"
-            variant="contained"
-            color="secondary"
-            className={classes.button}
-            onClick={() => { props.onUpdateStatus(TBR) }}>
-            Stop Reading
+          onClick={() => { props.onUpdateStatus(TBR) }}>
+          To Be Read
           </Button>
-        </div>
-      );
-    }
-    
+        <Button
+          size="small"
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          onClick={() => { props.onUpdateStatus(CURRENTLY_READING) }}>
+          Currently Reading
+          </Button>
+        <Button
+          size="small"
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          onClick={() => { props.onRead() }}>
+          Read
+          </Button>
+      </div>
+    );
+  }
+  else if (status === TBR) {
+    return (
+      <Button
+        size="small"
+        variant="contained"
+        color="secondary"
+        className={classes.button}
+        onClick={() => { props.onUpdateStatus(CURRENTLY_READING) }}>
+        Start Reading
+      </Button>
+    );
+  } else if (status === READ) {
+    return (
+      <Button
+        size="small"
+        variant="contained"
+        color="secondary"
+        className={classes.button}
+        onClick={() => { props.onUpdateStatus(CURRENTLY_READING) }}>
+        Read Again
+      </Button>
+    );
+  } else {
+    return (
+      <div>
+        <Button
+          size="small"
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          onClick={() => { props.onRead() }}>
+          Finish Reading
+          </Button> <br />
+        <Button
+          size="small"
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          onClick={() => { props.onUpdateStatus(TBR) }}>
+          Stop Reading
+          </Button>
+      </div>
+    );
+  }
+
 }
