@@ -5,10 +5,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import Snackbar from '@material-ui/core/Snackbar';
 import SearchResultBook from './SearchResultBook.component';
 import Alert from '@material-ui/lab/Alert';
-
-const EMPTY_SEARCH_QUERY = 'Please enter a search query';
-const BOOK_EXISTS = 'Book already exists in collection';
-const BOOK_ADDED = 'Book added to collection';
+import { ALERTS } from '../constants.js';
 
 class AddBook extends Component {
 
@@ -65,7 +62,7 @@ class AddBook extends Component {
     } else {
       this.setState({
         alertOpen: true,
-        alertMessage: EMPTY_SEARCH_QUERY,
+        alertMessage: ALERTS.EMPTY_SEARCH_QUERY,
       });
     }
   }
@@ -85,21 +82,31 @@ class AddBook extends Component {
     const { search_results, alertOpen, alertMessage } = this.state;
 
     let alert;
-    if (alertMessage === EMPTY_SEARCH_QUERY) {
-      alert =
-        <Alert icon={<SearchIcon fontSize="inherit" />} onClose={this.handleCloseAlert} severity="info">
-          {alertMessage}
-        </Alert>
-    } else if (alertMessage === BOOK_EXISTS) {
-      alert =
-        <Alert onClose={this.handleCloseAlert} severity="error">
-          {alertMessage}
-        </Alert>
-    } else if (alertMessage === BOOK_ADDED) {
-      alert =
-        <Alert onClose={this.handleCloseAlert} severity="success">
-          {alertMessage}
-        </Alert>
+    switch (alertMessage) {
+      case ALERTS.EMPTY_SEARCH_QUERY:
+        alert =
+          <Alert icon={<SearchIcon fontSize="inherit" />} onClose={this.handleCloseAlert} severity="info">
+            {alertMessage}
+          </Alert>;
+        break;
+
+      case ALERTS.BOOK_EXISTS:
+        alert =
+          <Alert onClose={this.handleCloseAlert} severity="error">
+            {alertMessage}
+          </Alert>;
+        break;
+
+      case ALERTS.BOOK_ADDED:
+        alert =
+          <Alert onClose={this.handleCloseAlert} severity="success">
+            {alertMessage}
+          </Alert>;
+        break;
+
+      default:
+        alert = '';
+        break;
     }
 
     return (

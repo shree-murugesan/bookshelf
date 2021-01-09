@@ -5,6 +5,16 @@ import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import { getRandomBook } from '../actions/books';
 
+const style = {
+  paddingLeft: '15px',
+};
+
+const inLineStyle = {
+  display: 'inline',
+  marginLeft: '15px',
+  marginBottom: '15px',
+};
+
 class PickNextBook extends Component {
 
   constructor(props) {
@@ -40,7 +50,7 @@ class PickNextBook extends Component {
     }
 
     return (
-      <div>
+      <div style={style}>
         <InputLabel>Genre</InputLabel>
         <NativeSelect value={genre} onChange={this.onChangeGenre}>
           <option aria-label="None" value="Any" />
@@ -48,8 +58,8 @@ class PickNextBook extends Component {
           <option value={'Fantasy'}>Fantasy</option>
           <option value={'Romance'}>Romance</option>
           <option value={'SciFi'}>Sci-Fi</option>
-        </NativeSelect> <p></p>
-        <Button variant="contained" onClick={this.onSelect} color="primary">PICK</Button>
+        </NativeSelect> 
+        <Button style={inLineStyle} id="pick-button" variant="contained" onClick={this.onSelect} color="primary">PICK</Button>
         <br />
         {book}
       </div>

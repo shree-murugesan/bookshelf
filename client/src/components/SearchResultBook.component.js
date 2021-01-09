@@ -5,14 +5,11 @@ import { Rating } from '@material-ui/lab';
 import { addBook } from '../actions/books';
 import RatingView from './RatingView.component';
 import BookButtons from './BookButtons';
+import { ALERTS } from '../constants.js';
 
 const style = {
   paddingLeft: '10px',
-  display: 'inline-block',
 };
-
-const BOOK_EXISTS = 'Book already exists in collection';
-const BOOK_ADDED = 'Book added to collection';
 
 class SearchResultBook extends Component {
 
@@ -45,9 +42,9 @@ class SearchResultBook extends Component {
 
     const respCode = await addBook(newBook);
     if (respCode === '400') {
-      this.props.setAlert(BOOK_EXISTS);
+      this.props.setAlert(ALERTS.BOOK_EXISTS);
     } else if (respCode === '201') {
-      this.props.setAlert(BOOK_ADDED);
+      this.props.setAlert(ALERTS.BOOK_ADDED);
     }
   }
 

@@ -9,3 +9,10 @@ export const MYSTERY = 'Mystery';
 export const FANTASY = 'Fantasy';
 export const CONTEMPORARY = 'Contemporary';
 export const SCIFI = 'SciFi';
+
+// Alert
+export const ALERTS = {
+    EMPTY_SEARCH_QUERY: 'Please enter a search query',
+    BOOK_EXISTS: 'Book already exists in collection',
+    BOOK_ADDED: 'Book added to collection',
+}; 

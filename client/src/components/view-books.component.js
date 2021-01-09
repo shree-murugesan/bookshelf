@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Book from './Book.component';
+import { Button } from '@material-ui/core';
 import { getBooksCurrentlyReading, getBooksRead, getBooksTBR } from '../actions/books';
 
 const style = {
@@ -55,7 +56,7 @@ class ViewBooks extends Component {
 
     return (
       <div style={style}>
-        <button onClick={this.changeView.bind(this)}>switch view</button>
+        <Button size="small" variant="contained" color="default" onClick={this.changeView.bind(this)}> Switch View </Button>
         <div className='currently-reading'>
           <h3>currently reading</h3>
           {booksCurrent.map((book) => (
