@@ -7,7 +7,7 @@ This is a web application designed to keep track of your book collection. You ca
 This was built with the MERN stack: MongoDB, Express, React (bootstrapped with [Create React App](https://github.com/facebook/create-react-app)), and Node.js. This is powered by the GoogleBooks API to get details of the book (title, author, average rating, number of pages, etc.). This is deployed on Heroku and Netlify.
 
 # To Do
-- [ ] <major> Improve UI of the app (*in progress*)
+- [ ] **<major>** Improve UI of the app (*in progress*)
 - [x] Prompt user to enter rating for book once they have finished reading
 - [ ] Prompt user to enter Genre when adding book to collection *OR* get it from an API
 - [ ] Provide option to select Rating threshold when picking random book (e.g. > 4 stars rating)
