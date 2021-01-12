@@ -1,6 +1,6 @@
-# [bookshelf](bookshelf-catalog.netlify.app)
+# [bookshelf](https://bookshelf-catalog.netlify.app)
 
-You can access this at: [bookshelf-catalog.netlify.app](bookshelf-catalog.netlify.app)
+You can access this at: [bookshelf-catalog.netlify.app](https://bookshelf-catalog.netlify.app)
 
 This is a web application designed to keep track of your book collection. You can search and add books to read; or if you've already read them you can save them to your collection with your rating. You can also catalog which books you are currently reading, and update them when you have finished reading it. If you would like to pick up a new book but cannot decide, you can randomly generate a book to read from your TBR (To Be Read) list. If you would like, you can also select the Genre you're feeling like reading to get a book better suited to your mood.
 
